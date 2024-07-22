@@ -1,4 +1,4 @@
-package utils;
+package sts.fps.utils;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -6,7 +6,7 @@ import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.graphics.PerspectiveCamera;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.IntIntMap;
-import renderer.FirstPersonRenderer;
+import sts.fps.renderer.FirstPersonRenderer;
 
 public class CameraController extends InputAdapter {
     private static final float MOVE_SPEED = 500.0f;

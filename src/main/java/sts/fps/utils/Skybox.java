@@ -1,4 +1,4 @@
-package utils;
+package sts.fps.utils;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.*;
@@ -20,7 +20,7 @@ public class Skybox implements Disposable {
 
     Mesh quad;
 
-    String vertexShader = "#version 330 core\n"
+    static final String VERTEX_SHADER = "#version 330 core\n"
             + "in vec3 a_position;\n"
             + "in vec2 a_texCoord;\n"
             + "out vec2 v_texCoord;\n"
@@ -31,7 +31,7 @@ public class Skybox implements Disposable {
             + "    gl_Position = u_projTrans * u_worldTrans * vec4(a_position, 1.0);\n"
             + "}\n";
 
-    String fragmentShader = "#version 330 core\n"
+    static final String FRAGMENT_SHADER = "#version 330 core\n"
             + "in vec2 v_texCoord;\n"
             + "out vec4 fragColor;\n"
             + "uniform sampler2D u_texture;\n"
@@ -107,7 +107,7 @@ public class Skybox implements Disposable {
     }
 
     public void init() {
-        program = new ShaderProgram(vertexShader, fragmentShader);
+        program = new ShaderProgram(VERTEX_SHADER, FRAGMENT_SHADER);
         if (!program.isCompiled())
             throw new GdxRuntimeException(program.getLog());
         u_projTrans = program.getUniformLocation("u_projTrans");

@@ -1,4 +1,4 @@
-package utils;
+package sts.fps.utils;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;

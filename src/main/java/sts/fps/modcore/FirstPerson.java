@@ -1,4 +1,4 @@
-package modcore;
+package sts.fps.modcore;
 
 import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer;
 

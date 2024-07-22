@@ -1,4 +1,4 @@
-package utils;
+package sts.fps.utils;
 
 import java.util.ArrayList;
 import java.util.function.Supplier;
