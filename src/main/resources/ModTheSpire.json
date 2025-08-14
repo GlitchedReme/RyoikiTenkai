@@ -1,8 +1,8 @@
 {
-  "modid": "FirstPerson",
-  "name": "FPS",
+  "modid": "RyoikiTenkai",
+  "name": "Ryoiki Tenkai（领域展开）",
   "author_list": ["REME"],
-  "description": "第一人称尖塔",
+  "description": "为一些能力牌添加新的动画。",
   "version": "1.0.0",
   "sts_version": "12-20-2022",
   "mts_version": "3.30.3",
