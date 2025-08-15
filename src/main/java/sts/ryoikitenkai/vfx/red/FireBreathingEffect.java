@@ -1,4 +1,4 @@
-package sts.ryoikitenkai.vfx.common;
+package sts.ryoikitenkai.vfx.red;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
@@ -8,12 +8,17 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.ScreenShake.ShakeDur;
 import com.megacrit.cardcrawl.helpers.ScreenShake.ShakeIntensity;
 import com.megacrit.cardcrawl.vfx.AbstractGameEffect;
+import com.megacrit.cardcrawl.vfx.combat.RedFireballEffect;
 
-public class CombustEffect extends AbstractGameEffect {
-   private int amount;
+public class FireBreathingEffect extends AbstractGameEffect {
+   private float x;
+   private float y;
+   private int timesUpgraded;
 
-   public CombustEffect(int amount) {
-      this.amount = amount;
+   public FireBreathingEffect(float x, float y, int timesUpgraded) {
+      this.x = x;
+      this.y = y;
+      this.timesUpgraded = timesUpgraded;
       CardCrawlGame.screenShake.shake(ShakeIntensity.HIGH, ShakeDur.SHORT, true);
    }
 
@@ -21,18 +26,9 @@ public class CombustEffect extends AbstractGameEffect {
       CardCrawlGame.sound.playA("ATTACK_FIRE", 0.3F);
       float px = AbstractDungeon.player.drawX;
       float py = AbstractDungeon.player.drawY + 50.0F * Settings.scale;
-
-      float randomAngle = MathUtils.random(0, 360);
-
-      for (int i = 0; i < 24; i++) {
-         float dx = MathUtils.cosDeg(randomAngle + i * 15) * Settings.WIDTH * Settings.scale;
-         float dy = MathUtils.sinDeg(randomAngle + i * 15) * Settings.WIDTH * Settings.scale;
-         float rx = MathUtils.random(-15.0F, 15.0F) * Settings.scale;
-         float ry = MathUtils.random(-15.0F, 15.0F) * Settings.scale;
-
-         AbstractDungeon.effectsQueue.add(new StaticFireballEffect(px + rx, py + ry, px + dx + rx, py + dy + ry, this.amount));
-      }
-
+      float rx = MathUtils.random(-150.0F, 150.0F) * Settings.scale;
+      float ry = MathUtils.random(-150.0F, 150.0F) * Settings.scale;
+      AbstractDungeon.effectsQueue.add(new RedFireballEffect(px, py, this.x + rx, this.y + ry, this.timesUpgraded));
       this.isDone = true;
    }
 

@@ -14,8 +14,8 @@ import com.megacrit.cardcrawl.vfx.combat.InflameEffect;
 
 import sts.ryoikitenkai.patch.AbstractPowerImpl;
 import sts.ryoikitenkai.utils.Utils;
-import sts.ryoikitenkai.vfx.common.FireBreathingEffect;
-import sts.ryoikitenkai.vfx.forever.BurningEffect;
+import sts.ryoikitenkai.vfx.red.BurningEffect;
+import sts.ryoikitenkai.vfx.red.FireBreathingEffect;
 
 public class FireBreathingPatch extends AbstractPowerImpl {
     @SpirePatch(clz = FireBreathing.class, method = "use")

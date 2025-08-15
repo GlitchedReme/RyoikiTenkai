@@ -1,4 +1,4 @@
-package sts.ryoikitenkai.vfx.common;
+package sts.ryoikitenkai.vfx.red;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
@@ -72,7 +72,7 @@ public class DemonFormFlashEffect extends AbstractGameEffect {
         }
         
         this.timer2 += dt;
-        if (this.timer2 > 0.1F) {
+        if (this.timer2 > 0.02F) {
             AbstractDungeon.effectsQueue.add(new ExhaustEmberEffect(this.x, this.y));
             this.timer2 = 0.0F;
         }

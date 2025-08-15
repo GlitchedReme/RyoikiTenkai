@@ -1,4 +1,4 @@
-package sts.ryoikitenkai.vfx.common;
+package sts.ryoikitenkai.vfx.red;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;

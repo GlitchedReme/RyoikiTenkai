@@ -1,4 +1,4 @@
-package sts.ryoikitenkai.vfx.forever;
+package sts.ryoikitenkai.vfx.red;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;

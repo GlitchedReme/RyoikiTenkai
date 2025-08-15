@@ -6,7 +6,7 @@ import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 import sts.ryoikitenkai.utils.Utils;
-import sts.ryoikitenkai.vfx.common.FeelNoPainEffect;
+import sts.ryoikitenkai.vfx.red.FeelNoPainEffect;
 
 public class FeelNoPainPatch {
     @SpirePatch(clz = FeelNoPain.class, method = "use")

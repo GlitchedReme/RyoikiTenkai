@@ -14,8 +14,8 @@ import com.megacrit.cardcrawl.vfx.stance.StanceChangeParticleGenerator;
 
 import sts.ryoikitenkai.patch.AbstractPowerImpl;
 import sts.ryoikitenkai.utils.Utils;
-import sts.ryoikitenkai.vfx.common.DemonFormFlashEffect;
-import sts.ryoikitenkai.vfx.common.OrbEffect;
+import sts.ryoikitenkai.vfx.red.DemonFormFlashEffect;
+import sts.ryoikitenkai.vfx.red.OrbEffect;
 
 public class DemonFormPatch extends AbstractPowerImpl {
     @SpirePatch(clz = DemonForm.class, method = "use")

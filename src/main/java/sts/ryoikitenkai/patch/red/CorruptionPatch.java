@@ -21,7 +21,7 @@ import sts.ryoikitenkai.modcore.RyoikiTenkai;
 import sts.ryoikitenkai.modcore.ShaderManager;
 import sts.ryoikitenkai.patch.AbstractPowerImpl;
 import sts.ryoikitenkai.utils.Utils;
-import sts.ryoikitenkai.vfx.common.CorruptionEffect;
+import sts.ryoikitenkai.vfx.red.CorruptionEffect;
 
 public class CorruptionPatch extends AbstractPowerImpl {
     @Override

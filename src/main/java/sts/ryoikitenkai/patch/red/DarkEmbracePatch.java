@@ -10,9 +10,9 @@ import com.megacrit.cardcrawl.powers.DarkEmbracePower;
 
 import sts.ryoikitenkai.patch.AbstractPowerImpl;
 import sts.ryoikitenkai.utils.Utils;
-import sts.ryoikitenkai.vfx.common.AuraEffect;
-import sts.ryoikitenkai.vfx.common.DarkEmbraceEffect;
-import sts.ryoikitenkai.vfx.common.OrbEffect;
+import sts.ryoikitenkai.vfx.red.AuraEffect;
+import sts.ryoikitenkai.vfx.red.DarkEmbraceEffect;
+import sts.ryoikitenkai.vfx.red.OrbEffect;
 
 public class DarkEmbracePatch extends AbstractPowerImpl {
 

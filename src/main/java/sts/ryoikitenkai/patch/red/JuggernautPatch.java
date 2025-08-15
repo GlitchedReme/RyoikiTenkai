@@ -7,7 +7,7 @@ import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.JuggernautPower;
 import sts.ryoikitenkai.utils.Utils;
-import sts.ryoikitenkai.vfx.common.JuggernautEffect;
+import sts.ryoikitenkai.vfx.red.JuggernautEffect;
 
 public class JuggernautPatch {
     @SpirePatch(clz = Juggernaut.class, method = "use")

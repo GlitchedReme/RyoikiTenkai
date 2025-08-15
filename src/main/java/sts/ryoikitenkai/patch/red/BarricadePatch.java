@@ -8,7 +8,7 @@ import com.megacrit.cardcrawl.powers.BarricadePower;
 
 import sts.ryoikitenkai.patch.AbstractPowerImpl;
 import sts.ryoikitenkai.utils.Utils;
-import sts.ryoikitenkai.vfx.common.BarricadeEffect;
+import sts.ryoikitenkai.vfx.red.BarricadeEffect;
 
 public class BarricadePatch extends AbstractPowerImpl {
 
