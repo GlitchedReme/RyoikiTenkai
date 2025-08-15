@@ -3,6 +3,9 @@ package sts.ryoikitenkai.patch.red;
 import com.evacipated.cardcrawl.modthespire.lib.SpireInsertPatch;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
 import com.megacrit.cardcrawl.actions.animations.VFXAction;
+import com.megacrit.cardcrawl.cards.red.Combust;
+import com.megacrit.cardcrawl.characters.AbstractPlayer;
+import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.powers.CombustPower;
 import com.megacrit.cardcrawl.vfx.combat.InflameEffect;
@@ -13,6 +16,13 @@ import sts.ryoikitenkai.vfx.common.CombustEffect;
 import sts.ryoikitenkai.vfx.forever.BurningEffect;
 
 public class CombustPatch extends AbstractPowerImpl {
+    @SpirePatch(clz = Combust.class, method = "use")
+    public static class Use {
+        public static void Prefix(Combust $this, AbstractPlayer p, AbstractMonster m) {
+            Utils.addToBot(new VFXAction(p, new InflameEffect(p), 0.1F));
+        }
+    }
+
     @SpirePatch(clz = CombustPower.class, method = "atEndOfTurn")
     public static class Power {
         @SpireInsertPatch(rloc = 2)
@@ -30,7 +40,6 @@ public class CombustPatch extends AbstractPowerImpl {
 
     @Override
     public void onApply(AbstractPower power) {
-        Utils.addToBot(new VFXAction(power.owner, new InflameEffect(power.owner), 0.1F));
 
         burningEffect = new BurningEffect(power.owner);
         Utils.addEffect(burningEffect);
