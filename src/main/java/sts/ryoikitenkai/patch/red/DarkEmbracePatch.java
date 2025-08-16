@@ -15,7 +15,6 @@ import sts.ryoikitenkai.vfx.red.DarkEmbraceEffect;
 import sts.ryoikitenkai.vfx.red.OrbEffect;
 
 public class DarkEmbracePatch extends AbstractPowerImpl {
-
     @SpirePatch(clz = DarkEmbrace.class, method = "use")
     public static class Use {
         public static void Prefix(DarkEmbrace $this, AbstractPlayer p, AbstractMonster m) {

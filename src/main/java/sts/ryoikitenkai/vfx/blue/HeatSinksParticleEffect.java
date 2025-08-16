@@ -1,0 +1,72 @@
+package sts.ryoikitenkai.vfx.blue;
+
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.math.Interpolation;
+import com.badlogic.gdx.math.MathUtils;
+import com.megacrit.cardcrawl.core.Settings;
+import com.megacrit.cardcrawl.helpers.ImageMaster;
+import com.megacrit.cardcrawl.vfx.AbstractGameEffect;
+
+public class HeatSinksParticleEffect extends AbstractGameEffect {
+    private float x;
+    private float y;
+
+    private float vX;
+    private float vY;
+
+    private float aV;
+
+    private float startDur;
+
+    private float targetScale;
+
+    private TextureAtlas.AtlasRegion img;
+
+    public HeatSinksParticleEffect(float x, float y, float scale) {
+        float value = MathUtils.random(0.6F, 0.9F);
+        this.color = new Color(value, value, value, 1.0F);
+        if (MathUtils.randomBoolean()) {
+            this.img = ImageMaster.EXHAUST_L;
+            this.duration = MathUtils.random(2.0F, 2.5F);
+            this.targetScale = MathUtils.random(0.8F, 2.2F) * scale;
+        } else {
+            this.img = ImageMaster.EXHAUST_S;
+            this.duration = MathUtils.random(2.0F, 2.5F);
+            this.targetScale = MathUtils.random(0.8F, 1.2F) * scale;
+        }
+        this.startDur = this.duration;
+        this.x = x + MathUtils.random(-180.0F * Settings.scale, 150.0F * Settings.scale) * scale - this.img.packedWidth / 2.0F;
+        this.y = y + MathUtils.random(-240.0F * Settings.scale, 150.0F * Settings.scale) * scale - this.img.packedHeight / 2.0F;
+        this.scale = 0.01F;
+        this.rotation = MathUtils.random(360.0F);
+        this.aV = MathUtils.random(-250.0F, 250.0F);
+        this.vX = MathUtils.random(0.0F * Settings.scale, -1.5F * Settings.scale);
+        this.vY = MathUtils.random(0.0F * Settings.scale, 1.5F * Settings.scale);
+    }
+
+    public void update() {
+        this.duration -= Gdx.graphics.getDeltaTime();
+        if (this.duration < 0.0F)
+            this.isDone = true;
+        this.x += MathUtils.random(-1.0F * Settings.scale, 1.0F * Settings.scale);
+        this.x += this.vX;
+        this.y += MathUtils.random(-1.0F * Settings.scale, 1.0F * Settings.scale);
+        this.y += this.vY;
+        this.rotation += this.aV * Gdx.graphics.getDeltaTime();
+        this.scale = Interpolation.exp10Out.apply(0.01F, this.targetScale, 1.0F - this.duration / this.startDur);
+        if (this.duration < 0.33F)
+            this.color.a = this.duration * 3.0F;
+    }
+
+    public void render(SpriteBatch sb) {
+        sb.setColor(this.color);
+        sb.draw(this.img, this.x, this.y, this.img.packedWidth / 2.0F, this.img.packedHeight / 2.0F, this.img.packedWidth,
+                this.img.packedHeight, this.scale, this.scale, this.rotation);
+    }
+
+    public void dispose() {
+    }
+}

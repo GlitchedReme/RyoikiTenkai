@@ -1,4 +1,4 @@
-package sts.ryoikitenkai.vfx.green;
+package sts.ryoikitenkai.vfx.blue;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -11,28 +11,34 @@ import com.esotericsoftware.spine.Skeleton;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.vfx.AbstractGameEffect;
 
-public class WraithFormEffect extends AbstractGameEffect {
+public class EchoFormEffect extends AbstractGameEffect {
     public Skeleton skeleton;
-    public ArrayList<Bone> eyes = new ArrayList<>();
+    public ArrayList<Bone> bones = new ArrayList<>();
     private float timer;
 
-    public static final List<String> EYE_NAMES = Arrays.asList("Eye", "eye_anchor", "Eye_down", "Eye_up");
+    public static final List<String> BONES = Arrays.asList(
+            "Arm_R_3",
+            "Arm_L_3",
+            "hand_left",
+            "hand_right",
+            "Hand_L",
+            "hand");
 
-    public WraithFormEffect(Skeleton skeleton) {
+    public EchoFormEffect(Skeleton skeleton) {
         if (skeleton == null) {
             this.isDone = true;
             return;
         }
 
         this.skeleton = skeleton;
-        for (String eyeName : EYE_NAMES) {
-            Bone eye = skeleton.findBone(eyeName);
-            if (eye != null) {
-                eyes.add(eye);
+        for (String name : BONES) {
+            Bone chest = skeleton.findBone(name);
+            if (chest != null) {
+                bones.add(chest);
             }
         }
 
-        if (eyes.isEmpty()) {
+        if (bones.isEmpty()) {
             this.isDone = true;
         }
     }
@@ -41,10 +47,10 @@ public class WraithFormEffect extends AbstractGameEffect {
     public void update() {
         timer += Gdx.graphics.getDeltaTime();
         if (timer > 0.1f) {
-            for (Bone eye : eyes) {
-                float x = eye.getWorldX() + skeleton.getX();
-                float y = eye.getWorldY() + skeleton.getY();
-                AbstractDungeon.effectsQueue.add(new WraithParticleEffect(x, y));
+            for (Bone bone : bones) {
+                float x = bone.getWorldX() + skeleton.getX();
+                float y = bone.getWorldY() + skeleton.getY();
+                AbstractDungeon.effectsQueue.add(new EchoParticleEffect(x, y));
             }
             timer = 0.0f;
         }

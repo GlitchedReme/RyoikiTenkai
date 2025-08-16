@@ -34,6 +34,10 @@ public class CorruptionEffect extends AbstractGameEffect {
                 eyes.add(eye);
             }
         }
+
+        if (eyes.isEmpty()) {
+            this.isDone = true;
+        }
     }
 
     @Override

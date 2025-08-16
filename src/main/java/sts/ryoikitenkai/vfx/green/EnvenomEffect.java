@@ -6,6 +6,8 @@ import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.vfx.AbstractGameEffect;
 
+import sts.ryoikitenkai.vfx.blue.HeatSinksParticleEffect;
+
 public class EnvenomEffect extends AbstractGameEffect {
 
     public float timer;
@@ -18,7 +20,8 @@ public class EnvenomEffect extends AbstractGameEffect {
     public void update() {
         this.timer += Gdx.graphics.getDeltaTime();
         if (this.timer > this.interval) {
-            SmokeParticleEffect effect = new SmokeParticleEffect(AbstractDungeon.player.hb.cX, AbstractDungeon.floorY + 60f * Settings.scale, 0.3F);
+            HeatSinksParticleEffect effect = new HeatSinksParticleEffect(AbstractDungeon.player.hb.cX, AbstractDungeon.floorY + 60f * Settings.scale,
+                    0.3F);
             effect.renderBehind = true;
             AbstractDungeon.effectsQueue.add(effect);
             this.timer = 0f;
