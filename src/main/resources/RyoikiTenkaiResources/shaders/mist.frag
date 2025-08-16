@@ -25,7 +25,7 @@ void main() {
     noise = smoothstep(0.3, 0.7, noise);
 
     vec3 purpleMist = vec3(0.4, 0.1, 0.7) * (0.5 + noise * 0.8);
-    vec3 mistedColor = mix(originalColor.rgb, purpleMist, 0.3);
+    vec3 mistedColor = mix(originalColor.rgb, purpleMist, 0.25);
 
     gl_FragColor = vec4(mistedColor, originalColor.a);
 }

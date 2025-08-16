@@ -23,6 +23,7 @@ public class DemonFormFlashEffect extends AbstractGameEffect {
 
     private float x;
     private float y;
+    private float offset;
     private float timer;
     private float timer2;
     public boolean isEnd;
@@ -71,9 +72,11 @@ public class DemonFormFlashEffect extends AbstractGameEffect {
             this.duration -= dt;
         }
         
+        this.offset = MathUtils.sinDeg(this.timer * 10F) * 8.0F * Settings.scale;
+
         this.timer2 += dt;
         if (this.timer2 > 0.02F) {
-            AbstractDungeon.effectsQueue.add(new ExhaustEmberEffect(this.x, this.y));
+            AbstractDungeon.effectsQueue.add(new ExhaustEmberEffect(this.x, this.y + this.offset));
             this.timer2 = 0.0F;
         }
 
@@ -92,7 +95,7 @@ public class DemonFormFlashEffect extends AbstractGameEffect {
         shader.setUniformf(ShaderManager.heatWaveAmplitude, 0.015F);
         shader.setUniformf(ShaderManager.heatWaveFrequency, 35.0F);
         shader.setUniformf(ShaderManager.heatWaveSpeed, 2.0F);
-        sb.draw(IMG, this.x - IMG.getWidth() / 2.0F, this.y - IMG.getHeight() / 2.0F, IMG.getWidth() / 2.0F, IMG.getHeight() / 2.0F,
+        sb.draw(IMG, this.x - IMG.getWidth() / 2.0F, this.y + this.offset - IMG.getHeight() / 2.0F, IMG.getWidth() / 2.0F, IMG.getHeight() / 2.0F,
                 IMG.getWidth(), IMG.getHeight(), 5.0F * Settings.scale, 5.0F * Settings.scale, 0, 0, 0, IMG.getWidth(), IMG.getHeight(), false,
                 false);
         sb.setShader(null);

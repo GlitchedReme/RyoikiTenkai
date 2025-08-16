@@ -2,7 +2,6 @@ package sts.ryoikitenkai.vfx.red;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 import com.badlogic.gdx.math.MathUtils;
@@ -23,7 +22,8 @@ public class BarricadeEffect extends AbstractGameEffect {
     public float timer;
     public boolean isEnd;
 
-    private static final float B = 100.0F;
+    private static final float B = 50.0F;
+    private static final float LINEAR_SPEED = 80.0F;
 
     private static AtlasRegion IMG = new AtlasRegion(ImageMaster.BLOCK_ICON, 0, 0, 64, 64);
 
@@ -37,15 +37,22 @@ public class BarricadeEffect extends AbstractGameEffect {
     }
 
     private float getR(float a) {
-        return (float) (B / Math.sqrt(1f - 0.75f * Math.pow(MathUtils.cosDeg(a), 2)));
+        return (float) (B / Math.sqrt(1f - 0.9375f * Math.pow(MathUtils.cosDeg(a), 2)));
     }
 
     @Override
     public void update() {
-        this.a += Gdx.graphics.getDeltaTime() * 60.0F;
+        float r = getR(this.a);
+
+        if (r > 0.1f) {
+            float angularVelocity = (LINEAR_SPEED / r) * MathUtils.radDeg;
+            this.a += angularVelocity * Gdx.graphics.getDeltaTime();
+        }
+
         if (this.a >= 360.0F)
             this.a -= 360.0F;
-        float r = getR(this.a);
+
+        r = getR(this.a);
 
         this.p.x = r * (float) MathUtils.cosDeg(this.a);
         this.p.y = r * (float) MathUtils.sinDeg(this.a);
@@ -75,10 +82,10 @@ public class BarricadeEffect extends AbstractGameEffect {
     @Override
     public void render(SpriteBatch sb) {
         sb.setColor(this.color);
-        sb.setBlendFunction(GL20.GL_SRC_ALPHA, GL20.GL_ONE);
+        // sb.setBlendFunction(GL20.GL_SRC_ALPHA, GL20.GL_ONE);
         sb.draw(IMG, this.cX + p.x - IMG.packedWidth / 2.0F, this.cY + p.y - IMG.packedHeight / 2.0F, IMG.packedWidth / 2F, IMG.packedHeight / 2F,
                 128, 128, 0.8F * scaleX, 0.8F, rotation);
-        sb.setBlendFunction(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
+        // sb.setBlendFunction(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
     }
 
     @Override

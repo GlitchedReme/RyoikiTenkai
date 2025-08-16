@@ -7,7 +7,7 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.vfx.AbstractGameEffect;
 
 public class NoxiousFumesEffect extends AbstractGameEffect {
-    
+
     public float x;
     public float y;
     public float sx;
@@ -31,6 +31,9 @@ public class NoxiousFumesEffect extends AbstractGameEffect {
     public void update() {
         this.timer += Gdx.graphics.getDeltaTime();
 
+        this.x = Interpolation.pow3.apply(this.dx, this.sx, this.duration / this.startingDuration);
+        this.y = Interpolation.pow3.apply(this.dy, this.sy, this.duration / this.startingDuration);
+
         while (this.timer > 0.0015F) {
             SmokeParticleEffect effect = new SmokeParticleEffect(this.x, this.y, renderBehind ? 0.2F : 0.4F);
             effect.renderBehind = this.renderBehind;
@@ -38,15 +41,12 @@ public class NoxiousFumesEffect extends AbstractGameEffect {
             this.timer -= 0.0015F;
         }
 
-        this.x = Interpolation.pow3.apply(this.dx, this.sx, this.duration / this.startingDuration);
-        this.y = Interpolation.pow3.apply(this.dy, this.sy, this.duration / this.startingDuration);
-
         this.duration -= Gdx.graphics.getDeltaTime();
         if (this.duration < 0F) {
             this.isDone = true;
         }
     }
-    
+
     @Override
     public void render(SpriteBatch sb) {
 
