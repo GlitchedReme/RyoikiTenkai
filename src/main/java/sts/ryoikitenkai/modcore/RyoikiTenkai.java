@@ -4,7 +4,6 @@ import java.util.HashMap;
 
 import com.badlogic.gdx.Gdx;
 import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer;
-
 import basemod.AutoAdd;
 import basemod.BaseMod;
 import basemod.interfaces.PostInitializeSubscriber;

@@ -1,6 +1,8 @@
 package sts.ryoikitenkai.patch.red;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.evacipated.cardcrawl.modthespire.lib.SpireInsertPatch;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
 import com.megacrit.cardcrawl.cards.red.DemonForm;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -50,5 +52,18 @@ public class DemonFormPatch extends AbstractPowerImpl {
     @Override
     public void onRemove(AbstractPower power) {
         demonFormFlashEffect.isEnd = true;
+    }
+
+    @SpirePatch(clz = AbstractDungeon.class, method = "render", paramtypez = { SpriteBatch.class })
+    public static class PutOnTopPatch {
+        @SpireInsertPatch(loc = 2672)
+        public static void Insert(AbstractDungeon $this, SpriteBatch sb) {
+            for (int i = 0; i < AbstractDungeon.effectList.size(); i++) {
+                if (AbstractDungeon.effectList.get(i) instanceof DemonFormFlashEffect) {
+                    AbstractDungeon.effectList.add(AbstractDungeon.effectList.remove(i));
+                    break;
+                }
+            }
+        }
     }
 }
