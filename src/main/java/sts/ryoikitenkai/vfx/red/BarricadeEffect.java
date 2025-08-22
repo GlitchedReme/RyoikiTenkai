@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
+import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.helpers.ImageMaster;
 import com.megacrit.cardcrawl.vfx.AbstractGameEffect;
 
@@ -67,9 +68,9 @@ public class BarricadeEffect extends AbstractGameEffect {
         if (isEnd) {
             this.timer -= Gdx.graphics.getDeltaTime();
             if (this.timer <= 0.0F) {
-                this.isEnd = false;
-                this.color.a = this.timer / 0.5F;
+                this.isDone = true;
             }
+            this.color.a = this.timer / 0.5F;
         } else {
             this.timer += Gdx.graphics.getDeltaTime();
             if (this.timer >= 0.5F) {
@@ -84,7 +85,7 @@ public class BarricadeEffect extends AbstractGameEffect {
         sb.setColor(this.color);
         // sb.setBlendFunction(GL20.GL_SRC_ALPHA, GL20.GL_ONE);
         sb.draw(IMG, this.cX + p.x - IMG.packedWidth / 2.0F, this.cY + p.y - IMG.packedHeight / 2.0F, IMG.packedWidth / 2F, IMG.packedHeight / 2F,
-                128, 128, 0.8F * scaleX, 0.8F, rotation);
+                128, 128, 0.8F * scaleX * Settings.scale, 0.8F * Settings.scale, rotation);
         // sb.setBlendFunction(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
     }
 

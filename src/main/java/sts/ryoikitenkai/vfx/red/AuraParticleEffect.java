@@ -42,9 +42,9 @@ public class AuraParticleEffect extends AbstractGameEffect {
     @Override
     public void update() {
         if (this.duration > 1.0F) {
-            this.color.a = Interpolation.fade.apply(0.3F, 0.0F, this.duration - 1.0F);
+            this.color.a = Interpolation.fade.apply(0.2F, 0.0F, this.duration - 1.0F);
         } else {
-            this.color.a = Interpolation.fade.apply(0.0F, 0.3F, this.duration);
+            this.color.a = Interpolation.fade.apply(0.0F, 0.2F, this.duration);
         }
 
         this.rotation += Gdx.graphics.getDeltaTime() * this.vY;

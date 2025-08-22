@@ -73,7 +73,7 @@ public class DefectLogEffect extends AbstractGameEffect {
             float offset = 0F;
             for (int j = 0; j < log.fragments.size(); j++) {
                 TextFragment fragment = log.fragments.get(j);
-                fragment.x = x * Settings.scale + offset;
+                fragment.x = x + offset;
                 FontHelper.layout.setText(FontHelper.blockInfoFont, fragment.visibleText);
                 offset += FontHelper.layout.width;
             }

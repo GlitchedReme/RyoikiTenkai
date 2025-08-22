@@ -3,7 +3,7 @@
   "name": "Ryoiki Tenkai（领域展开）",
   "author_list": ["REME"],
   "description": "为一些能力牌添加新的动画。",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "sts_version": "12-20-2022",
   "mts_version": "3.30.3",
   "dependencies": ["basemod"]

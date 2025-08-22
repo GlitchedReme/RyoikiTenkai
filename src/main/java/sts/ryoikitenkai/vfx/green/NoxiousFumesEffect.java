@@ -6,8 +6,6 @@ import com.badlogic.gdx.math.Interpolation;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.vfx.AbstractGameEffect;
 
-import sts.ryoikitenkai.vfx.blue.HeatSinksParticleEffect;
-
 public class NoxiousFumesEffect extends AbstractGameEffect {
 
     public float x;
@@ -37,7 +35,7 @@ public class NoxiousFumesEffect extends AbstractGameEffect {
         this.y = Interpolation.pow3.apply(this.dy, this.sy, this.duration / this.startingDuration);
 
         while (this.timer > 0.0015F) {
-            HeatSinksParticleEffect effect = new HeatSinksParticleEffect(this.x, this.y, renderBehind ? 0.2F : 0.4F);
+            SmokeParticleEffect effect = new SmokeParticleEffect(this.x, this.y, renderBehind ? 0.2F : 0.4F);
             effect.renderBehind = this.renderBehind;
             AbstractDungeon.effectsQueue.add(effect);
             this.timer -= 0.0015F;

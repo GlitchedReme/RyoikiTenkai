@@ -3,7 +3,9 @@ package sts.ryoikitenkai.vfx.green;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.badlogic.gdx.math.Interpolation;
 import com.esotericsoftware.spine.Skeleton;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -23,6 +25,8 @@ public class AfterImageEffect extends AbstractGameEffect {
 
     private static final Color COLOR1 = new Color(0.678f, 0.922f, 0.678f, 0.6f);
     private static final Color COLOR2 = new Color(1.0f, 1.0f, 0.678f, 0.6f);
+
+    public static FrameBuffer shadowBuffer = new FrameBuffer(Pixmap.Format.RGBA8888, Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), false, false);
 
     public AfterImageEffect() {
         this.renderBehind = true;
@@ -64,19 +68,34 @@ public class AfterImageEffect extends AbstractGameEffect {
                     p.img.getHeight(), p.flipHorizontal, p.flipVertical);
             sb.setBlendFunction(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
         } else {
+            sb.end();
+            shadowBuffer.begin();
+            Gdx.gl.glClearColor(0.0F, 0.0F, 0.0F, 0.0F);
+
+            Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
+            Gdx.gl.glColorMask(true, true, true, true);
+            // sb.begin();
+
             Skeleton skeleton = ReflectionHacks.getPrivate(p, AbstractCreature.class, "skeleton");
             p.state.apply(skeleton);
             skeleton.updateWorldTransform();
             skeleton.setPosition(x + p.drawX + p.animX, y + p.drawY + p.animY);
-            skeleton.setColor(color);
+            // skeleton.setColor(color);
             skeleton.setFlip(p.flipHorizontal, p.flipVertical);
-            sb.end();
+            // sb.end();
             CardCrawlGame.psb.begin();
             CardCrawlGame.psb.setBlendFunction(GL20.GL_SRC_ALPHA, GL20.GL_ONE);
             AbstractCreature.sr.draw(CardCrawlGame.psb, skeleton);
             CardCrawlGame.psb.setBlendFunction(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
             CardCrawlGame.psb.end();
+            // sb.begin();
+
+            // sb.end();
+            shadowBuffer.end();
             sb.begin();
+
+            sb.setColor(color);
+            sb.draw(shadowBuffer.getColorBufferTexture(), 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), false, true);
         }
     }
 
