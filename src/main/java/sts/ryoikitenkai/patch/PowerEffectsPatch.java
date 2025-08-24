@@ -41,4 +41,15 @@ public class PowerEffectsPatch {
             }
         }
     }
+
+    @SpirePatch(clz = AbstractPower.class, method = "onDeath")
+    public static class OnDeathPatch {
+        public static void Postfix(AbstractPower $this) {
+            if (!RyoikiTenkai.powerImpls.containsKey($this.ID)) {
+                return;
+            }
+
+            RyoikiTenkai.powerImpls.get($this.ID).onRemove($this);
+        }
+    }
 }
