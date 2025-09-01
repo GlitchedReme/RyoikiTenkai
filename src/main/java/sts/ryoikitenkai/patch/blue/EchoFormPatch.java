@@ -12,6 +12,7 @@ import com.megacrit.cardcrawl.vfx.BorderFlashEffect;
 
 import basemod.Pair;
 import basemod.ReflectionHacks;
+import sts.ryoikitenkai.modcore.RyoikiTenkai;
 import sts.ryoikitenkai.patch.AbstractPowerImpl;
 import sts.ryoikitenkai.utils.Utils;
 import sts.ryoikitenkai.vfx.FormParticleEffect;
@@ -23,8 +24,15 @@ public class EchoFormPatch extends AbstractPowerImpl {
     @SpirePatch(clz = EchoForm.class, method = "use")
     public static class Use {
         public static void Prefix(EchoForm $this, AbstractPlayer p, AbstractMonster m) {
+            if (!RyoikiTenkai.isEnable(EchoForm.ID)) {
+                return;
+            }
             for (int i = 0; i < 30; i++) {
                 Utils.addEffect(new OrbEffect(p.hb.cX, p.hb.cY, i, Color.CYAN.cpy()));
+            }
+            Color color = new Color(0.3F, 0.3F, 0.3F, 0.4F);
+            for (int i = 0; i < 30; i++) {
+                Utils.addEffect(new OrbEffect(p.hb.cX, p.hb.cY, i, color));
             }
             Utils.addEffect(new FormParticleEffect(p.hb.cX, Color.CYAN.cpy()));
             Utils.addEffect(new BorderFlashEffect(Color.CYAN, true));

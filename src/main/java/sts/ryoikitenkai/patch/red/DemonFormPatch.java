@@ -28,6 +28,10 @@ public class DemonFormPatch extends AbstractPowerImpl {
             for (int i = 0; i < 30; i++) {
                 Utils.addEffect(new OrbEffect(p.hb.cX, p.hb.cY, i, color));
             }
+            Color color2 = new Color(0.3F, 0.3F, 0.3F, 0.4F);
+            for (int i = 0; i < 30; i++) {
+                Utils.addEffect(new OrbEffect(p.hb.cX, p.hb.cY, i, color2));
+            }
             Utils.addEffect(new BorderFlashEffect(Color.SCARLET, true));
             for (int i = 0; i < 10; i++) {
                 AbstractDungeon.effectsQueue.add(new FormParticleEffect(p.hb.cX, color));

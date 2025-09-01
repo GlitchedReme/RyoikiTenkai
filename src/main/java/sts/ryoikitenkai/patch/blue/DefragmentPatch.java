@@ -7,6 +7,7 @@ import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 import basemod.Pair;
+import sts.ryoikitenkai.modcore.RyoikiTenkai;
 import sts.ryoikitenkai.utils.Utils;
 import sts.ryoikitenkai.vfx.blue.DefectLogEffect;
 
@@ -14,6 +15,9 @@ public class DefragmentPatch {
     @SpirePatch(clz = Defragment.class, method = "use")
     public static class Use {
         public static void Prefix(Defragment $this, AbstractPlayer p, AbstractMonster m) {
+            if (!RyoikiTenkai.isEnable(Defragment.ID)) {
+                return;
+            }
             Utils.addEffect(new DefectLogEffect()
                     .addLog(
                             new Pair<>("EXECUTE Defragment(", Color.WHITE.cpy()),

@@ -10,6 +10,7 @@ import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.powers.CombustPower;
 import com.megacrit.cardcrawl.vfx.combat.InflameEffect;
 
+import sts.ryoikitenkai.modcore.RyoikiTenkai;
 import sts.ryoikitenkai.patch.AbstractPowerImpl;
 import sts.ryoikitenkai.utils.Utils;
 import sts.ryoikitenkai.vfx.red.BurningEffect;
@@ -19,6 +20,9 @@ public class CombustPatch extends AbstractPowerImpl {
     @SpirePatch(clz = Combust.class, method = "use")
     public static class Use {
         public static void Prefix(Combust $this, AbstractPlayer p, AbstractMonster m) {
+            if (!RyoikiTenkai.isEnable(Combust.ID)) {
+                return;
+            }
             Utils.addToBot(new VFXAction(p, new InflameEffect(p), 0.1F));
         }
     }
@@ -27,6 +31,9 @@ public class CombustPatch extends AbstractPowerImpl {
     public static class Power {
         @SpireInsertPatch(rloc = 2)
         public static void Insert(CombustPower $this) {
+            if (!RyoikiTenkai.isEnable(Combust.ID)) {
+                return;
+            }
             Utils.addEffect(new CombustEffect($this.amount / 5));
         }
     }

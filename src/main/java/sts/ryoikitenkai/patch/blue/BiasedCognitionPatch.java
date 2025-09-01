@@ -7,6 +7,7 @@ import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 import basemod.Pair;
+import sts.ryoikitenkai.modcore.RyoikiTenkai;
 import sts.ryoikitenkai.utils.Utils;
 import sts.ryoikitenkai.vfx.blue.DefectLogEffect;
 
@@ -14,6 +15,9 @@ public class BiasedCognitionPatch {
     @SpirePatch(clz = BiasedCognition.class, method = "use")
     public static class Use {
         public static void Prefix(BiasedCognition $this, AbstractPlayer p, AbstractMonster m) {
+            if (!RyoikiTenkai.isEnable(BiasedCognition.ID)) {
+                return;
+            }
             Utils.addEffect(new DefectLogEffect()
                     .addLog("ROOT_ACCESS: GRANTED", Color.WHITE.cpy())
                     .addLog(

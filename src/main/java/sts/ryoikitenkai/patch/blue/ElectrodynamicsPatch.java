@@ -13,6 +13,7 @@ import com.megacrit.cardcrawl.powers.ElectroPower;
 import com.megacrit.cardcrawl.vfx.combat.LightningOrbPassiveEffect;
 
 import basemod.Pair;
+import sts.ryoikitenkai.modcore.RyoikiTenkai;
 import sts.ryoikitenkai.utils.Utils;
 import sts.ryoikitenkai.vfx.blue.DefectLogEffect;
 
@@ -20,6 +21,9 @@ public class ElectrodynamicsPatch {
     @SpirePatch(clz = Electrodynamics.class, method = "use")
     public static class Use {
         public static void Prefix(Electrodynamics $this, AbstractPlayer p, AbstractMonster m) {
+            if (!RyoikiTenkai.isEnable(Electrodynamics.ID)) {
+                return;
+            }
             Utils.addEffect(new DefectLogEffect()
                     .addLog(
                             new Pair<>("LOAD DRIVER: ", Color.WHITE.cpy()),
@@ -33,6 +37,9 @@ public class ElectrodynamicsPatch {
     public static class LightningPatch {
         @SpireInsertPatch(rloc = 4)
         public static void Insert(Lightning $this) {
+            if (!RyoikiTenkai.isEnable(Electrodynamics.ID)) {
+                return;
+            }
             AbstractPlayer p = AbstractDungeon.player;
             if (p != null && p.hasPower(ElectroPower.POWER_ID)) {
                 for (int i = 0; i < MathUtils.random(0, 3); i++) {

@@ -9,6 +9,7 @@ import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.powers.CreativeAIPower;
 
 import basemod.Pair;
+import sts.ryoikitenkai.modcore.RyoikiTenkai;
 import sts.ryoikitenkai.patch.AbstractPowerImpl;
 import sts.ryoikitenkai.utils.Utils;
 import sts.ryoikitenkai.vfx.blue.CreativeAIEffect;
@@ -18,6 +19,9 @@ public class CreativeAIPatch extends AbstractPowerImpl {
     @SpirePatch(clz = CreativeAI.class, method = "use")
     public static class Use {
         public static void Prefix(CreativeAI $this, AbstractPlayer p, AbstractMonster m) {
+            if (!RyoikiTenkai.isEnable(CreativeAI.ID)) {
+                return;
+            }
             Utils.addEffect(new DefectLogEffect()
                     .addLog(
                             new Pair<>("ACTIVATE NeuralNetwork: ", Color.WHITE.cpy()),

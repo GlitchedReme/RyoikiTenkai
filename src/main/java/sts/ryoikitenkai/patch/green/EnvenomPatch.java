@@ -1,8 +1,11 @@
 package sts.ryoikitenkai.patch.green;
 
+import java.util.WeakHashMap;
+
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
 import com.megacrit.cardcrawl.cards.green.Envenom;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
+import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
@@ -29,16 +32,20 @@ public class EnvenomPatch extends AbstractPowerImpl {
         return EnvenomPower.POWER_ID;
     }
 
-    EnvenomEffect envenomEffect;
+    WeakHashMap<AbstractCreature, EnvenomEffect> map = new WeakHashMap<>();
 
     @Override
     public void onApply(AbstractPower power) {
-        envenomEffect = new EnvenomEffect();
+        EnvenomEffect envenomEffect = new EnvenomEffect();
+        map.put(power.owner, envenomEffect);
         Utils.addEffect(envenomEffect);
     }
 
     @Override
     public void onRemove(AbstractPower power) {
+        if (!map.containsKey(power.owner))
+            return;
+        EnvenomEffect envenomEffect = map.get(power.owner);
         envenomEffect.isDone = true;
         envenomEffect = null;
     }

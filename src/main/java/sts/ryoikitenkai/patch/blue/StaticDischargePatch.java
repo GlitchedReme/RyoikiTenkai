@@ -9,6 +9,7 @@ import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.powers.StaticDischargePower;
 
 import basemod.Pair;
+import sts.ryoikitenkai.modcore.RyoikiTenkai;
 import sts.ryoikitenkai.patch.AbstractPowerImpl;
 import sts.ryoikitenkai.utils.Utils;
 import sts.ryoikitenkai.vfx.blue.DefectLogEffect;
@@ -19,6 +20,9 @@ public class StaticDischargePatch extends AbstractPowerImpl {
     @SpirePatch(clz = StaticDischarge.class, method = "use")
     public static class Use {
         public static void Prefix(StaticDischarge $this, AbstractPlayer p, AbstractMonster m) {
+            if (!RyoikiTenkai.isEnable(StaticDischarge.ID)) {
+                return;
+            }
             Utils.addEffect(new DefectLogEffect()
                     .addLog(new Pair<>("ACTIVATE Protocol: ", Color.WHITE.cpy()),
                             new Pair<>("STATIC_DISCHARGE", Color.BLUE.cpy()))

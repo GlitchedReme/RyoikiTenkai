@@ -9,6 +9,7 @@ import com.evacipated.cardcrawl.modthespire.lib.SpirePostfixPatch;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePrefixPatch;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.AbstractCard.CardType;
+import com.megacrit.cardcrawl.cards.red.Corruption;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
@@ -56,6 +57,9 @@ public class CorruptionPatch extends AbstractPowerImpl {
 
         @SpirePrefixPatch
         public static void Prefix(AbstractCard $this, SpriteBatch sb) {
+            if (!RyoikiTenkai.isEnable(Corruption.ID)) {
+                return;
+            }
             if (!corrupt($this))
                 return;
 

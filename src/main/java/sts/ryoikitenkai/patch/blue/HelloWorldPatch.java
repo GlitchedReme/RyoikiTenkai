@@ -7,6 +7,7 @@ import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 import basemod.Pair;
+import sts.ryoikitenkai.modcore.RyoikiTenkai;
 import sts.ryoikitenkai.utils.Utils;
 import sts.ryoikitenkai.vfx.blue.DefectLogEffect;
 
@@ -14,6 +15,9 @@ public class HelloWorldPatch {
     @SpirePatch(clz = HelloWorld.class, method = "use")
     public static class Use {
         public static void Prefix(HelloWorld $this, AbstractPlayer p, AbstractMonster m) {
+            if (!RyoikiTenkai.isEnable(HelloWorld.ID)) {
+                return;
+            }
             Utils.addEffect(new DefectLogEffect()
                     .addLog(new Pair<>("RUN: ", Color.WHITE.cpy()),
                             new Pair<>("\"HelloWorld.exe\"", Color.GOLD.cpy()))

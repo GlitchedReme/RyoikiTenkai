@@ -9,6 +9,7 @@ import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.powers.watcher.DevaPower;
 import com.megacrit.cardcrawl.vfx.BorderFlashEffect;
 
+import sts.ryoikitenkai.modcore.RyoikiTenkai;
 import sts.ryoikitenkai.patch.AbstractPowerImpl;
 import sts.ryoikitenkai.utils.Utils;
 import sts.ryoikitenkai.vfx.FormParticleEffect;
@@ -19,6 +20,9 @@ public class DevaFormPatch extends AbstractPowerImpl {
     @SpirePatch(clz = DevaForm.class, method = "use")
     public static class Use {
         public static void Prefix(DevaForm $this, AbstractPlayer p, AbstractMonster m) {
+            if (!RyoikiTenkai.isEnable(DevaForm.ID)) {
+                return;
+            }
             for (int i = 0; i < 30; i++) {
                 Utils.addEffect(new OrbEffect(p.hb.cX, p.hb.cY, i, Color.PURPLE.cpy()));
             }

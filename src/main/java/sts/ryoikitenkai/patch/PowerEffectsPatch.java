@@ -10,7 +10,7 @@ public class PowerEffectsPatch {
     @SpirePatch(clz = AbstractPower.class, method = "onInitialApplication")
     public static class OnInitPatch {
         public static void Prefix(AbstractPower $this) {
-            if (!RyoikiTenkai.powerImpls.containsKey($this.ID)) {
+            if (!RyoikiTenkai.isPowerEnabled($this.ID)) {
                 return;
             }
 
@@ -21,7 +21,7 @@ public class PowerEffectsPatch {
     @SpirePatch(clz = AbstractPower.class, method = "onRemove")
     public static class OnRemovePatch {
         public static void Postfix(AbstractPower $this) {
-            if (!RyoikiTenkai.powerImpls.containsKey($this.ID)) {
+            if (!RyoikiTenkai.isPowerEnabled($this.ID)) {
                 return;
             }
 
@@ -45,7 +45,7 @@ public class PowerEffectsPatch {
     @SpirePatch(clz = AbstractPower.class, method = "onDeath")
     public static class OnDeathPatch {
         public static void Postfix(AbstractPower $this) {
-            if (!RyoikiTenkai.powerImpls.containsKey($this.ID)) {
+            if (!RyoikiTenkai.isPowerEnabled($this.ID)) {
                 return;
             }
 

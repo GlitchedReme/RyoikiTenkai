@@ -9,6 +9,7 @@ import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.powers.StormPower;
 
 import basemod.Pair;
+import sts.ryoikitenkai.modcore.RyoikiTenkai;
 import sts.ryoikitenkai.patch.AbstractPowerImpl;
 import sts.ryoikitenkai.utils.Utils;
 import sts.ryoikitenkai.vfx.blue.DefectLogEffect;
@@ -18,6 +19,9 @@ public class StormPatch extends AbstractPowerImpl {
     @SpirePatch(clz = Storm.class, method = "use")
     public static class Use {
         public static void Prefix(Storm $this, AbstractPlayer p, AbstractMonster m) {
+            if (!RyoikiTenkai.isEnable(Storm.ID)) {
+                return;
+            }
             Utils.addEffect(new DefectLogEffect()
                     .addLog(new Pair<>("Weather control protocol switched to: ", Color.WHITE.cpy()),
                             new Pair<>("[STORM]", Color.SKY.cpy()))

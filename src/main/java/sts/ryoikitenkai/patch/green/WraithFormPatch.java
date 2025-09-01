@@ -14,7 +14,7 @@ import com.evacipated.cardcrawl.modthespire.lib.SpireInsertLocator;
 import com.evacipated.cardcrawl.modthespire.lib.SpireInsertPatch;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
 import com.evacipated.cardcrawl.modthespire.patcher.PatchingException;
-import com.megacrit.cardcrawl.cards.red.DemonForm;
+import com.megacrit.cardcrawl.cards.green.WraithForm;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.characters.Watcher;
 import com.megacrit.cardcrawl.core.AbstractCreature;
@@ -31,6 +31,7 @@ import basemod.ReflectionHacks;
 import basemod.interfaces.PostUpdateSubscriber;
 import javassist.CannotCompileException;
 import javassist.CtBehavior;
+import sts.ryoikitenkai.modcore.RyoikiTenkai;
 import sts.ryoikitenkai.patch.AbstractPowerImpl;
 import sts.ryoikitenkai.utils.Utils;
 import sts.ryoikitenkai.vfx.FormParticleEffect;
@@ -42,9 +43,12 @@ public class WraithFormPatch extends AbstractPowerImpl implements PostUpdateSubs
         BaseMod.subscribe(this);
     }
 
-    @SpirePatch(clz = DemonForm.class, method = "use")
+    @SpirePatch(clz = WraithForm.class, method = "use")
     public static class Use {
-        public static void Prefix(DemonForm $this, AbstractPlayer p, AbstractMonster m) {
+        public static void Prefix(WraithForm $this, AbstractPlayer p, AbstractMonster m) {
+            if (!RyoikiTenkai.isEnable(WraithForm.ID)) {
+                return;
+            }
             CardCrawlGame.sound.play("NECRONOMICON", -0.5F);
             Color color = new Color(0.3F, 0.3F, 0.3F, 0.4F);
             for (int i = 0; i < 30; i++) {
@@ -90,6 +94,9 @@ public class WraithFormPatch extends AbstractPowerImpl implements PostUpdateSubs
 
     @Override
     public void receivePostUpdate() {
+        if (!RyoikiTenkai.isEnable(WraithForm.ID)) {
+            return;
+        }
         timer += Gdx.graphics.getDeltaTime();
         if (start) {
             if (timer < 1F) {
@@ -111,6 +118,9 @@ public class WraithFormPatch extends AbstractPowerImpl implements PostUpdateSubs
     public static class PlayerRenderAtlasColorChanger2 {
         @SpireInsertPatch(locator = Locator.class)
         public static void Insert(AbstractPlayer $this, SpriteBatch sb) {
+            if (!RyoikiTenkai.isEnable(WraithForm.ID)) {
+                return;
+            }
             if ($this.hasPower(IntangiblePlayerPower.POWER_ID) && $this.hasPower(WraithFormPower.POWER_ID))
                 sb.setColor(color);
         }
@@ -128,6 +138,9 @@ public class WraithFormPatch extends AbstractPowerImpl implements PostUpdateSubs
     public static class PlayerRenderSkeletonColorChanger {
         @SpireInsertPatch(locator = Locator.class)
         public static void Insert(AbstractPlayer $this, SpriteBatch sb, Skeleton ___skeleton) {
+            if (!RyoikiTenkai.isEnable(WraithForm.ID)) {
+                return;
+            }
             if ($this.hasPower(IntangiblePlayerPower.POWER_ID) && $this.hasPower(WraithFormPower.POWER_ID))
                 ___skeleton.setColor(color);
         }

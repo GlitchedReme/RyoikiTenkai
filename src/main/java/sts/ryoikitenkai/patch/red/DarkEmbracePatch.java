@@ -8,6 +8,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.powers.DarkEmbracePower;
 
+import sts.ryoikitenkai.modcore.RyoikiTenkai;
 import sts.ryoikitenkai.patch.AbstractPowerImpl;
 import sts.ryoikitenkai.utils.Utils;
 import sts.ryoikitenkai.vfx.red.AuraEffect;
@@ -18,6 +19,9 @@ public class DarkEmbracePatch extends AbstractPowerImpl {
     @SpirePatch(clz = DarkEmbrace.class, method = "use")
     public static class Use {
         public static void Prefix(DarkEmbrace $this, AbstractPlayer p, AbstractMonster m) {
+            if (!RyoikiTenkai.isEnable(DarkEmbrace.ID)) {
+                return;
+            }
             Color color = new Color(1.0F, 0.15F, 0.8F, 0.4F);
             for (int i = 0; i < 32; i++) {
                 Utils.addEffect(new OrbEffect(p.hb.cX, p.hb.cY, i, color));
