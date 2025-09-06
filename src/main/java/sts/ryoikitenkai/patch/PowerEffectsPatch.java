@@ -1,8 +1,11 @@
 package sts.ryoikitenkai.patch;
 
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
+import com.evacipated.cardcrawl.modthespire.lib.SpirePatches;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.powers.AbstractPower;
+import com.megacrit.cardcrawl.powers.DexterityPower;
+import com.megacrit.cardcrawl.powers.StrengthPower;
 
 import sts.ryoikitenkai.modcore.RyoikiTenkai;
 
@@ -15,6 +18,22 @@ public class PowerEffectsPatch {
             }
 
             RyoikiTenkai.powerImpls.get($this.ID).onApply($this);
+        }
+    }
+
+    @SpirePatches({
+            @SpirePatch(clz = DexterityPower.class, method = "stackPower"),
+            @SpirePatch(clz = DexterityPower.class, method = "reducePower"),
+            @SpirePatch(clz = StrengthPower.class, method = "stackPower"),
+            @SpirePatch(clz = StrengthPower.class, method = "reducePower")
+    })
+    public static class OnStackPatch {
+        public static void Postfix(AbstractPower $this, int stackAmount) {
+            if (!RyoikiTenkai.isPowerEnabled($this.ID)) {
+                return;
+            }
+
+            RyoikiTenkai.powerImpls.get($this.ID).onStack($this, stackAmount);
         }
     }
 

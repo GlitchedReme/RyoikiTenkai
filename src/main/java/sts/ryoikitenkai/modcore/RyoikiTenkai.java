@@ -26,12 +26,14 @@ import com.megacrit.cardcrawl.cards.green.AfterImage;
 import com.megacrit.cardcrawl.cards.green.Caltrops;
 import com.megacrit.cardcrawl.cards.green.AThousandCuts;
 import com.megacrit.cardcrawl.cards.green.Envenom;
+import com.megacrit.cardcrawl.cards.green.Footwork;
 import com.megacrit.cardcrawl.cards.green.InfiniteBlades;
 import com.megacrit.cardcrawl.cards.green.NoxiousFumes;
 import com.megacrit.cardcrawl.cards.green.ToolsOfTheTrade;
 import com.megacrit.cardcrawl.cards.green.WellLaidPlans;
 import com.megacrit.cardcrawl.cards.green.WraithForm;
 import com.megacrit.cardcrawl.cards.purple.DevaForm;
+import com.megacrit.cardcrawl.cards.purple.Devotion;
 import com.megacrit.cardcrawl.cards.red.Barricade;
 import com.megacrit.cardcrawl.cards.red.Berserk;
 import com.megacrit.cardcrawl.cards.red.Brutality;
@@ -42,6 +44,7 @@ import com.megacrit.cardcrawl.cards.red.DemonForm;
 import com.megacrit.cardcrawl.cards.red.Evolve;
 import com.megacrit.cardcrawl.cards.red.FeelNoPain;
 import com.megacrit.cardcrawl.cards.red.FireBreathing;
+import com.megacrit.cardcrawl.cards.red.Inflame;
 import com.megacrit.cardcrawl.cards.red.Juggernaut;
 import com.megacrit.cardcrawl.cards.red.Metallicize;
 import com.megacrit.cardcrawl.cards.red.Rupture;
@@ -52,6 +55,7 @@ import com.megacrit.cardcrawl.helpers.ImageMaster;
 import com.megacrit.cardcrawl.localization.UIStrings;
 import com.megacrit.cardcrawl.powers.*;
 import com.megacrit.cardcrawl.powers.watcher.DevaPower;
+import com.megacrit.cardcrawl.powers.watcher.MantraPower;
 
 import basemod.AutoAdd;
 import basemod.BaseMod;
@@ -164,6 +168,7 @@ public class RyoikiTenkai implements PostInitializeSubscriber, PostUpdateSubscri
         cardPowerPairs.put(RepairPower.POWER_ID, SelfRepair.ID);
         cardPowerPairs.put(StaticDischargePower.POWER_ID, StaticDischarge.ID);
         cardPowerPairs.put(StormPower.POWER_ID, Storm.ID);
+        cardPowerPairs.put(FocusPower.POWER_ID, Defragment.ID);
         // Red
         cardPowerPairs.put(DemonFormPower.POWER_ID, DemonForm.ID);
         cardPowerPairs.put(BarricadePower.POWER_ID, Barricade.ID);
@@ -178,6 +183,7 @@ public class RyoikiTenkai implements PostInitializeSubscriber, PostUpdateSubscri
         cardPowerPairs.put(JuggernautPower.POWER_ID, Juggernaut.ID);
         cardPowerPairs.put(MetallicizePower.POWER_ID, Metallicize.ID);
         cardPowerPairs.put(RupturePower.POWER_ID, Rupture.ID);
+        cardPowerPairs.put(StrengthPower.POWER_ID, Inflame.ID);
         // Green
         cardPowerPairs.put(WraithFormPower.POWER_ID, WraithForm.ID);
         cardPowerPairs.put(NoxiousFumesPower.POWER_ID, NoxiousFumes.ID);
@@ -188,8 +194,10 @@ public class RyoikiTenkai implements PostInitializeSubscriber, PostUpdateSubscri
         cardPowerPairs.put(InfiniteBladesPower.POWER_ID, InfiniteBlades.ID);
         cardPowerPairs.put(ToolsOfTheTradePower.POWER_ID, ToolsOfTheTrade.ID);
         cardPowerPairs.put(RetainCardPower.POWER_ID, WellLaidPlans.ID);
+        cardPowerPairs.put(DexterityPower.POWER_ID, Footwork.ID);
         // Purple
         cardPowerPairs.put(DevaPower.POWER_ID, DevaForm.ID);
+        cardPowerPairs.put(MantraPower.POWER_ID, Devotion.ID);
 
         // Done Cards
         // Blue
@@ -219,6 +227,7 @@ public class RyoikiTenkai implements PostInitializeSubscriber, PostUpdateSubscri
         doneCards.add(FireBreathing.ID);
         doneCards.add(Juggernaut.ID);
         doneCards.add(Rupture.ID);
+        doneCards.add(Inflame.ID);
         // Green
         doneCards.add(WraithForm.ID);
         doneCards.add(NoxiousFumes.ID);
@@ -227,7 +236,9 @@ public class RyoikiTenkai implements PostInitializeSubscriber, PostUpdateSubscri
         doneCards.add(Envenom.ID);
         doneCards.add(WellLaidPlans.ID);
         doneCards.add(Caltrops.ID);
+        doneCards.add(Footwork.ID);
         // Purple
         doneCards.add(DevaForm.ID);
+        doneCards.add(Devotion.ID);
     }
 }
