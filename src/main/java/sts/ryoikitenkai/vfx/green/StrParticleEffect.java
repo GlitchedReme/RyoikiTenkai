@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.math.MathUtils;
+import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.ImageMaster;
@@ -22,7 +23,7 @@ public class StrParticleEffect extends AbstractGameEffect {
     private float dvx = 400.0F * Settings.scale * this.scale;
     private float dvy = 100.0F * Settings.scale;
 
-    public StrParticleEffect(Color color, boolean isNegative) {
+    public StrParticleEffect(AbstractCreature owner, Color color, boolean isNegative) {
         this.duration = MathUtils.random(0.6F, 1.0F);
         this.scale = MathUtils.random(0.6F, 1.2F) * Settings.scale;
         this.dur_div2 = this.duration / 2.0F;
@@ -30,15 +31,15 @@ public class StrParticleEffect extends AbstractGameEffect {
         if (isNegative) {
             this.vX = MathUtils.random(-10F, 10F) * Settings.scale;
             this.vY = -MathUtils.random(100.0F, 200.0F) * Settings.scale;
-            this.x = AbstractDungeon.player.hb.cX + MathUtils.random(-180.0F, 180.0F) * Settings.scale - 32.0F;
-            this.y = AbstractDungeon.player.hb.cY + MathUtils.random(140.0F, 200.0F) * Settings.scale - 32.0F;
+            this.x = owner.hb.cX + MathUtils.random(-180.0F, 180.0F) * Settings.scale - 32.0F;
+            this.y = owner.hb.cY + MathUtils.random(140.0F, 200.0F) * Settings.scale - 32.0F;
             this.dvx = 1.0F * Settings.scale * this.scale;
             this.dvy = -100.0F * Settings.scale;
         } else {
             this.vX = MathUtils.random(-10.0F, 10.0F) * Settings.scale;
             this.vY = MathUtils.random(100.0F, 200.0F) * Settings.scale;
-            this.x = AbstractDungeon.player.hb.cX + MathUtils.random(-180.0F, 180.0F) * Settings.scale - 32.0F;
-            this.y = AbstractDungeon.player.hb.cY - MathUtils.random(140.0F, 200.0F) * Settings.scale - 32.0F;
+            this.x = owner.hb.cX + MathUtils.random(-180.0F, 180.0F) * Settings.scale - 32.0F;
+            this.y = owner.hb.cY - MathUtils.random(140.0F, 200.0F) * Settings.scale - 32.0F;
             this.dvx = 1.0F * Settings.scale * this.scale;
             this.dvy = 100.0F * Settings.scale;
         }

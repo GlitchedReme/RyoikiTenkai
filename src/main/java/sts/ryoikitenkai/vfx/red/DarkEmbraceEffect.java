@@ -24,8 +24,8 @@ public class DarkEmbraceEffect extends AbstractGameEffect {
     @Override
     public void update() {
         this.color.a += 0.005f;
-        if (this.color.a > 0.3f) {
-            this.color.a = 0.3f;
+        if (this.color.a > 0.15f) {
+            this.color.a = 0.15f;
         }
 
         for (int i = this.fireFlies.size() - 1; i >= 0; i--) {

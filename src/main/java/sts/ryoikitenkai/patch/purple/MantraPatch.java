@@ -22,7 +22,7 @@ public class MantraPatch extends AbstractPowerImpl {
 
     @Override
     public void onApply(AbstractPower power) {
-        WindParticleEffect effect = new WindParticleEffect(() -> new Color(MathUtils.random(0.5F, 0.7F), 0.0F, MathUtils.random(0.7F, 1.0F), 0.0F));
+        WindParticleEffect effect = new WindParticleEffect(power.owner, () -> new Color(MathUtils.random(0.5F, 0.7F), 0.0F, MathUtils.random(0.7F, 1.0F), 0.0F));
         effect.isDex = false;
         effect.isNegative = power.amount < 0;
         effect.interval = Math.max(0.01F, 0.04f - (0.004f * Math.abs(power.amount))) * 2;

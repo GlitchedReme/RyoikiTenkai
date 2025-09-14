@@ -5,6 +5,7 @@ import java.util.function.Supplier;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.vfx.AbstractGameEffect;
 
@@ -16,19 +17,21 @@ public class WindParticleEffect extends AbstractGameEffect {
     public boolean isDex = true;
     public boolean isNegative = false;
 
+    private final AbstractCreature owner;
     private final Supplier<Color> color;
 
-    public WindParticleEffect(Supplier<Color> color) {
+    public WindParticleEffect(AbstractCreature owner, Supplier<Color> color) {
         this.renderBehind = true;
+        this.owner = owner;
         this.color = color;
     }
 
     @Override
     public void update() {
         this.timer += Gdx.graphics.getDeltaTime();
-        if (this.timer > this.interval) {
+        if (this.timer > this.interval && !isNegative) {
             Color color = this.color.get();
-            AbstractDungeon.effectsQueue.add(new StrParticleEffect(color, isNegative));
+            AbstractDungeon.effectsQueue.add(new StrParticleEffect(owner, color, isNegative));
 
             this.timer = 0f;
         }

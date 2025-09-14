@@ -5,7 +5,9 @@ import com.evacipated.cardcrawl.modthespire.lib.SpirePatches;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.powers.DexterityPower;
+import com.megacrit.cardcrawl.powers.FocusPower;
 import com.megacrit.cardcrawl.powers.StrengthPower;
+import com.megacrit.cardcrawl.powers.watcher.MantraPower;
 
 import sts.ryoikitenkai.modcore.RyoikiTenkai;
 
@@ -25,7 +27,10 @@ public class PowerEffectsPatch {
             @SpirePatch(clz = DexterityPower.class, method = "stackPower"),
             @SpirePatch(clz = DexterityPower.class, method = "reducePower"),
             @SpirePatch(clz = StrengthPower.class, method = "stackPower"),
-            @SpirePatch(clz = StrengthPower.class, method = "reducePower")
+            @SpirePatch(clz = StrengthPower.class, method = "reducePower"),
+            @SpirePatch(clz = FocusPower.class, method = "stackPower"),
+            @SpirePatch(clz = FocusPower.class, method = "reducePower"),
+            @SpirePatch(clz = MantraPower.class, method = "stackPower")
     })
     public static class OnStackPatch {
         public static void Postfix(AbstractPower $this, int stackAmount) {

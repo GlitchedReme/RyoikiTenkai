@@ -22,7 +22,7 @@ public class FootworkPatch extends AbstractPowerImpl {
 
     @Override
     public void onApply(AbstractPower power) {
-        WindParticleEffect effect = new WindParticleEffect(() -> new Color(MathUtils.random(0.1F, 0.2F), MathUtils.random(0.6F, 0.8F), 0.1F, 0.0F));
+        WindParticleEffect effect = new WindParticleEffect(power.owner, () -> new Color(MathUtils.random(0.1F, 0.2F), MathUtils.random(0.6F, 0.8F), 0.1F, 0.0F));
         effect.isNegative = power.amount < 0;
         effect.interval = Math.max(0.01F, 0.04f - (0.001f * Math.abs(power.amount))) * 2;
         effects.put(power.owner, effect);

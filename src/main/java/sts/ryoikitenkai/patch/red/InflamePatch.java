@@ -22,7 +22,7 @@ public class InflamePatch extends AbstractPowerImpl {
 
     @Override
     public void onApply(AbstractPower power) {
-        WindParticleEffect effect = new WindParticleEffect(() -> new Color(MathUtils.random(0.6F, 0.8F), MathUtils.random(0.1F, 0.2F), 0.1F, 0.0F));
+        WindParticleEffect effect = new WindParticleEffect(power.owner, () -> new Color(MathUtils.random(0.6F, 0.8F), MathUtils.random(0.1F, 0.2F), 0.1F, 0.0F));
         effect.isDex = false;
         effect.isNegative = power.amount < 0;
         effect.interval = Math.max(0.01F, 0.04f - (0.001f * Math.abs(power.amount))) * 2;
@@ -40,7 +40,6 @@ public class InflamePatch extends AbstractPowerImpl {
 
     @Override
     public void onStack(AbstractPower power, int stackAmount) {
-
         WindParticleEffect effect = effects.get(power.owner);
         if (effect != null) {
             effect.isNegative = power.amount < 0;
